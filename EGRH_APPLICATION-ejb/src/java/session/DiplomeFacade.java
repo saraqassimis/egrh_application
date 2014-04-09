@@ -7,10 +7,13 @@
 package session;
 
 import bean.Diplome;
+import bean.Employe;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,6 +32,12 @@ public class DiplomeFacade extends AbstractFacade<Diplome> implements DiplomeFac
 
     public DiplomeFacade() {
         super(Diplome.class);
+    }
+    @Override
+    public List<Diplome> loadDiplomes(Employe e){
+        Query q=em.createQuery("SELECT  d FROM Diplome d WHERE d.employe.id="+e.getId());
+        return q.getResultList();
+        
     }
     
 }

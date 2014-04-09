@@ -10,17 +10,23 @@
             <h:outputText value="#{bundle.ListEmploiprecedentTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListEmploiprecedentEmpty}" rendered="#{emploiprecedentController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{emploiprecedentController.items.rowCount > 0}">
-                    <h:outputText value="#{emploiprecedentController.pagination.pageFirstItem + 1}..#{emploiprecedentController.pagination.pageLastItem + 1}/#{emploiprecedentController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{emploiprecedentController.previous}" value="#{bundle.Previous} #{emploiprecedentController.pagination.pageSize}" rendered="#{emploiprecedentController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{emploiprecedentController.next}" value="#{bundle.Next} #{emploiprecedentController.pagination.pageSize}" rendered="#{emploiprecedentController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{emploiprecedentController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+            <h:form>
+       
+                     <div class="content-box-large">
+
+                    <div class="panel-body">
+                        <fieldset>
+                            <legend>Liste des emplois precedents</legend><br></br>
+                             <div  class="well">
+                                  <h:link  class="btn btn-lg btn-block btn-default" outcome="/employe/List" ><label>List des employés </label></h:link>
+                                        <h:commandLink  class="btn btn-lg btn-block btn-default" action="#{emploiprecedentController.prepareCreate}"><label>Ajouter un emploi </label></h:commandLink>
+               </div> 
+                            
+                            <br /> <br />
+
+                            <h:dataTable value="#{emploiprecedentController.getAllEmploisPrecedentOfEmploye(employeController.selected)}" var="item" border="0" styleClass="table table-striped table-bordered example">
+
+                                     <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListEmploiprecedentTitle_id}"/>
                             </f:facet>
@@ -31,7 +37,7 @@
                                 <h:outputText value="#{bundle.ListEmploiprecedentTitle_dateDebut}"/>
                             </f:facet>
                             <h:outputText value="#{item.dateDebut}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </h:column>
                         <h:column>
@@ -39,7 +45,7 @@
                                 <h:outputText value="#{bundle.ListEmploiprecedentTitle_dateFin}"/>
                             </f:facet>
                             <h:outputText value="#{item.dateFin}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </h:column>
                         <h:column>
@@ -72,23 +78,29 @@
                             </f:facet>
                             <h:outputText value="#{item.contrat}"/>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{emploiprecedentController.prepareView}" value="#{bundle.ListEmploiprecedentViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{emploiprecedentController.prepareEdit}" value="#{bundle.ListEmploiprecedentEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{emploiprecedentController.destroy}" value="#{bundle.ListEmploiprecedentDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{emploiprecedentController.prepareCreate}" value="#{bundle.ListEmploiprecedentCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListEmploiprecedentIndexLink}"/>
+                        
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink class="btn btn-default" action="#{emploiprecedentController.prepareView}" ><i class=" glyphicon glyphicon-eye-open " style="font-size:20px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                    <h:outputText value="     "/>
+                                    <h:commandLink class="btn btn-primary" action="#{emploiprecedentController.editeView(item)}"><i class=" glyphicon glyphicon-pencil " style="font-size:20px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                    <h:outputText value="     "/>
+                                    <h:commandLink class="btn btn-danger" action="#{emploiprecedentController.delete(item)}"><i class=" glyphicon glyphicon-remove " style="font-size:20px;"/>
+                                    
+                                    </h:commandLink>
+
+
+                                </h:column>
+                            </h:dataTable>
+
+                        </fieldset>
+                    </div>
+                </div>
+           
             </h:form>
         </ui:define>
     </ui:composition>

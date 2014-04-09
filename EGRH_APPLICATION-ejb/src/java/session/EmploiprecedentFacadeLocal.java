@@ -7,6 +7,7 @@
 package session;
 
 import bean.Emploiprecedent;
+import bean.Employe;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,7 +29,7 @@ public interface EmploiprecedentFacadeLocal {
     List<Emploiprecedent> findAll();
 
     List<Emploiprecedent> findRange(int[] range);
-
+List<Emploiprecedent> loadEmploiPrecedents(Employe e);
     int count();
     
 }

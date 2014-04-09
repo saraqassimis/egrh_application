@@ -1,11 +1,13 @@
 package controller;
 
 import bean.Employe;
+import bean.Poste;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.EmployeFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -31,7 +33,26 @@ public class EmployeController implements Serializable {
 
     public EmployeController() {
     }
-
+ public String detailEmplois(Employe employe){
+        employe.setEmploiprecedentList(ejbFacade.loadEmploiPrecedents(employe));
+        current=employe;
+        return "/emploiprecedent/ListEmplois";
+    }
+      public String detailDiplomes(Employe employe){
+          employe.setDiplomeList(ejbFacade.loadDiplomes(employe));
+          current=employe;
+        return "/diplome/ListDiplomes";
+      }
+      public String detailsEvaluation (Employe employe){
+          employe.setEvalueremployeList(ejbFacade.loadEvaluations(employe));
+          System.out.println("*********la requet f le controller "+ejbFacade.loadEvaluations(employe));
+           current=employe;
+        return "/evalueremploye/ListEvaluations";
+      }
+          
+    public List<Poste> getPostOfSevice(){
+          return ejbFacade.findPostOFservice(current.getService());
+      }
     public Employe getSelected() {
         if (current == null) {
             current = new Employe();
@@ -79,11 +100,11 @@ public class EmployeController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+   public String create() {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EmployeCreated"));
-            return prepareCreate();
+            return "/emploiprecedent/Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

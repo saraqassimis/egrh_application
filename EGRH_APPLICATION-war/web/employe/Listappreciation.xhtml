@@ -14,9 +14,7 @@
                     <div class="panel-body">
                         <fieldset>
                             <legend>Liste des employés</legend><br></br>
-                             <div  class="well">
-                                        <h:commandLink  class="btn btn-lg btn-block btn-default" action="#{employeController.prepareCreate}"><label>Ajouter un employé </label></h:commandLink>
-               </div> 
+                           
                             
                             <br /> <br />
 
@@ -41,34 +39,17 @@
                                     </f:facet>
                                     <h:outputText value="#{item.poste}"/>
                                 </h:column>
-                                
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Emplois precedents"/>
-                                    </f:facet>
-                                
-                                    <h:commandLink class="btn btn-primary large" action="#{employeController.detailEmplois(item)}"><i class=" glyphicon glyphicon-list-alt" style="font-size:20px;"/>Emplois</h:commandLink>
-
-
-                                </h:column>
-                                 <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Diplomes"/>
-                                    </f:facet>
-                                 
-                                   <h:commandLink class="btn btn-primary" action="#{employeController.detailDiplomes(item)}"><i class=" glyphicon glyphicon-list-alt" style="font-size:20px;"/></h:commandLink>
-
-
-                                </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="&nbsp;"/>
                                     </f:facet>
-                                    <h:commandLink class="btn btn-default" action="#{employeController.prepareView}" ><i class=" glyphicon glyphicon-eye-open " style="font-size:20px;"/></h:commandLink>
+                                 
                                     <h:outputText value="     "/>
                                     <h:outputText value="     "/>
-                                    <h:commandLink class="btn btn-primary" action="#{employeController.prepareEdit}"><i class=" glyphicon glyphicon-pencil " style="font-size:20px;"/></h:commandLink>
-                                  
+                                    <h:commandLink class="btn btn-primary" action="#{employeController.detailsEvaluation(item)}"><i class=" glyphicon glyphicon-star" style="font-size:20px;"/>Appreciation</h:commandLink>
+                                   
+
+
                                 </h:column>
                             </h:dataTable>
 

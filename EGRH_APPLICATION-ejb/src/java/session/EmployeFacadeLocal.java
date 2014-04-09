@@ -6,7 +6,12 @@
 
 package session;
 
+import bean.Diplome;
+import bean.Emploiprecedent;
 import bean.Employe;
+import bean.Evaluationemploye;
+import bean.Poste;
+import bean.Service;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +35,12 @@ public interface EmployeFacadeLocal {
     List<Employe> findRange(int[] range);
 
     int count();
+    List<Poste> findPostOFservice (Service s);
+      List<Emploiprecedent> loadEmploiPrecedents(Employe e);
+   
+   List<Diplome> loadDiplomes(Employe e);
+   
+ List<Evaluationemploye> loadEvaluations(Employe e);
+
     
 }

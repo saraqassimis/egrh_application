@@ -1,11 +1,13 @@
 package controller;
 
 import bean.Diplome;
+import bean.Employe;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.DiplomeFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +30,7 @@ public class DiplomeController implements Serializable {
     private session.DiplomeFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    int indice;
 
     public DiplomeController() {
     }
@@ -61,6 +64,22 @@ public class DiplomeController implements Serializable {
         }
         return pagination;
     }
+     public String delete(Diplome diplome){
+      
+       System.out.println("a");
+    getFacade().remove(diplome);
+     System.out.println("b");
+     recreatePagination();
+        recreateModel();
+      JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DiplomeDeleted"));
+ 
+    return "ListDiplomes";
+}
+public String editeView(Diplome diplome){
+   current=diplome;
+   indice=current.getEmploye().getDiplomeList().indexOf(diplome);
+    return "Edit";
+}
 
     public String prepareList() {
         recreateModel();
@@ -79,11 +98,23 @@ public class DiplomeController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+   public List<Diplome> getAllDiplomeOfEmploye(Employe e){
+     
+     return getFacade().loadDiplomes(e); 
+ }
+         
+        
+     public String create(Employe employe) {
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DiplomeCreated"));
-            return prepareCreate();
+            current.setEmploye(employe);
+            System.out.println("++++Diplome++++"+employe);
+           getFacade().create(current);
+           System.out.println("******Diplome*****"+current);
+            recreateModel();
+          JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DiplomeCreated"));
+           current = new Diplome();
+        selectedItemIndex = -1;
+           return"Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

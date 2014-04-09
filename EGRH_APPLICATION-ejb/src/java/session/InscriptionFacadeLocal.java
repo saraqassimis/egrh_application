@@ -6,7 +6,10 @@
 
 package session;
 
+import bean.Employe;
 import bean.Inscription;
+import bean.Service;
+import bean.Sessionf;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +33,8 @@ public interface InscriptionFacadeLocal {
     List<Inscription> findRange(int[] range);
 
     int count();
+    public List<Inscription> loadInscription(Sessionf f);
+    List<Employe> findServiceDeEmploye(Service s);
+    List<Inscription> listInscrit();
     
 }

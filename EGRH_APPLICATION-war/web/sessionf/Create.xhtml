@@ -9,36 +9,51 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateSessionfTitle}"></h:outputText>
         </ui:define>
+        
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateSessionfLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{sessionfController.selected.id}" title="#{bundle.CreateSessionfTitle_id}" />
-                    <h:outputLabel value="#{bundle.CreateSessionfLabel_dateDebut}" for="dateDebut" />
-                    <h:inputText id="dateDebut" value="#{sessionfController.selected.dateDebut}" title="#{bundle.CreateSessionfTitle_dateDebut}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateSessionfLabel_formation}" for="formation" />
-                    <h:selectOneMenu id="formation" value="#{sessionfController.selected.formation}" title="#{bundle.CreateSessionfTitle_formation}" >
-                        <f:selectItems value="#{formationController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateSessionfLabel_planformation}" for="planformation" />
-                    <h:selectOneMenu id="planformation" value="#{sessionfController.selected.planformation}" title="#{bundle.CreateSessionfTitle_planformation}" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content-box-large">
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:form class="form-horizontal">
+                            <fieldset >
+                                <legend>Ajout d'une session de formation</legend><br></br>
+                                <div class="form-group">
+                    <h:outputLabel value="Plan de formation :" class="col-sm-2 control-label" for="planformation" />
+                    <div class="col-sm-6">
+                        <h:selectOneMenu id="planformation" value="#{sessionfController.selected.planformation}" class="form-control" title="#{bundle.CreateSessionfTitle_planformation}" required="true" requiredMessage="#{bundle.CreateSessionfRequiredMessage_planformation}">
                         <f:selectItems value="#{planformationController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                </h:panelGrid>
+                    </div></div>
+                                <div class="form-group">
+                    <h:outputLabel value="Début :" class="col-sm-2 control-label" for="dateDebut" />
+                    <div class="col-sm-6">
+                        <h:inputText  class="form-control datep" id="dateDebut" value="#{sessionfController.selected.dateDebut}"  title="#{bundle.CreateSessionfTitle_dateDebut}" >
+                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                     </h:inputText>
+                       </div></div>
+                    <div class="form-group">
+                    <h:outputLabel value="Formation :" class="col-sm-2 control-label" for="formation" />
+                    <div class="col-sm-6">
+                        <h:selectOneMenu id="formation" value="#{sessionfController.selected.formation}" class="form-control" title="#{bundle.CreateSessionfTitle_formation}" required="true" requiredMessage="#{bundle.CreateSessionfRequiredMessage_formation}">
+                        <f:selectItems value="#{formationController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                   </div></div>
                 <br />
-                <h:commandLink action="#{sessionfController.create}" value="#{bundle.CreateSessionfSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{sessionfController.prepareList}" value="#{bundle.CreateSessionfShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateSessionfIndexLink}"/>
+                <div style="margin-left: 365px">
+                                <h:commandLink  class="btn btn-primary "  action="#{sessionfController.create}" value="Ajouter" />
+                                <small></small>
+                                <h:commandLink  class="btn btn-info " action="#{sessionfController.prepareList}" value="Planning des sessions de formation " immediate="true"/>
+                </div>
+
+                 </fieldset>
             </h:form>
+                        </div>
+                                    </div>
+                          </div>
+            
         </ui:define>
     </ui:composition>
 

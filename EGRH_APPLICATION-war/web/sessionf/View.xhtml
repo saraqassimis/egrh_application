@@ -15,16 +15,16 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSessionfLabel_formation}"/>
+                    <h:outputText value="#{sessionfController.selected.forid}" title="#{bundle.ViewSessionfTitle_formation}"/>
+                    <h:outputText value="#{bundle.ViewSessionfLabel_planformation}"/>
+                    <h:outputText value="#{sessionfController.selected.plaid}" title="#{bundle.ViewSessionfTitle_planformation}"/>
                     <h:outputText value="#{bundle.ViewSessionfLabel_id}"/>
                     <h:outputText value="#{sessionfController.selected.id}" title="#{bundle.ViewSessionfTitle_id}"/>
                     <h:outputText value="#{bundle.ViewSessionfLabel_dateDebut}"/>
                     <h:outputText value="#{sessionfController.selected.dateDebut}" title="#{bundle.ViewSessionfTitle_dateDebut}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewSessionfLabel_formation}"/>
-                    <h:outputText value="#{sessionfController.selected.formation}" title="#{bundle.ViewSessionfTitle_formation}"/>
-                    <h:outputText value="#{bundle.ViewSessionfLabel_planformation}"/>
-                    <h:outputText value="#{sessionfController.selected.planformation}" title="#{bundle.ViewSessionfTitle_planformation}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{sessionfController.destroyAndView}" value="#{bundle.ViewSessionfDestroyLink}"/>

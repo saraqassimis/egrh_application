@@ -7,10 +7,13 @@
 package session;
 
 import bean.Planformation;
+import bean.Sessionf;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -30,5 +33,10 @@ public class PlanformationFacade extends AbstractFacade<Planformation> implement
     public PlanformationFacade() {
         super(Planformation.class);
     }
-    
+    @Override
+     public List<Sessionf> loadSessionf(Planformation p)
+    {Query q= em.createQuery("SELECT s FROM Sessionf s WHERE s.planformation.id ="+ p.getId());
+        System.out.println(q);
+    return q.getResultList();
+    }
 }

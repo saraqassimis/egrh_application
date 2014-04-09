@@ -15,20 +15,19 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditSessionfLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{sessionfController.selected.id}" title="#{bundle.EditSessionfTitle_id}" />
-                    <h:outputLabel value="#{bundle.EditSessionfLabel_dateDebut}" for="dateDebut" />
-                    <h:inputText id="dateDebut" value="#{sessionfController.selected.dateDebut}" title="#{bundle.EditSessionfTitle_dateDebut}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
                     <h:outputLabel value="#{bundle.EditSessionfLabel_formation}" for="formation" />
-                    <h:selectOneMenu id="formation" value="#{sessionfController.selected.formation}" title="#{bundle.EditSessionfTitle_formation}" >
+                    <h:selectOneMenu id="formation" value="#{sessionfController.selected.forid}" title="#{bundle.EditSessionfTitle_formation}" required="true" requiredMessage="#{bundle.EditSessionfRequiredMessage_formation}">
                         <f:selectItems value="#{formationController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditSessionfLabel_planformation}" for="planformation" />
-                    <h:selectOneMenu id="planformation" value="#{sessionfController.selected.planformation}" title="#{bundle.EditSessionfTitle_planformation}" >
+                    <h:selectOneMenu id="planformation" value="#{sessionfController.selected.plaid}" title="#{bundle.EditSessionfTitle_planformation}" required="true" requiredMessage="#{bundle.EditSessionfRequiredMessage_planformation}">
                         <f:selectItems value="#{planformationController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditSessionfLabel_dateDebut}" for="dateDebut" />
+                    <h:inputText  class="form-control datep" id="dateDebut" value="#{sessionfController.selected.dateDebut}"  title="#{bundle.CreateSessionfTitle_dateDebut}" >
+                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                     </h:inputText>
+                    
                 </h:panelGrid>
                 <h:commandLink action="#{sessionfController.update}" value="#{bundle.EditSessionfSaveLink}"/>
                 <br />

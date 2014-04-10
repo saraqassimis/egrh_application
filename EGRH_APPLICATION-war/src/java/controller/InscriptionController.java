@@ -1,11 +1,14 @@
 package controller;
 
+import bean.Employe;
 import bean.Inscription;
+import bean.Sessionf;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.InscriptionFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -24,6 +27,7 @@ public class InscriptionController implements Serializable {
 
     private Inscription current;
     private DataModel items = null;
+    private int indice;
     @EJB
     private session.InscriptionFacade ejbFacade;
     private PaginationHelper pagination;
@@ -32,6 +36,15 @@ public class InscriptionController implements Serializable {
     public InscriptionController() {
     }
 
+    public List<Inscription> getAllInscriptionOfSessionf (Sessionf f)
+    {
+        return getFacade().loadInscription(f);
+    }
+    
+    public List<Employe> getRmployeFromService()
+    {
+        return ejbFacade.findServiceDeEmploye(current.getService());
+    }
     public Inscription getSelected() {
         if (current == null) {
             current = new Inscription();
@@ -78,12 +91,30 @@ public class InscriptionController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    
+    
 
-    public String create() {
+    public String editView(Inscription i)
+    {current = i;
+    indice=current.getSession().getInscriptions().indexOf(i);
+    return "Edit";
+    }
+    
+   
+    
+    public String create(Sessionf f) {
+        
         try {
+            current.setSession(f);
+           
             getFacade().create(current);
+            System.out.println("+++++++"+f.getInscriptions());
+            f.setInscriptions(getFacade().listInscrit());
+            System.out.println("*********"+f.getInscriptions());
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("InscriptionCreated"));
-            return prepareCreate();
+           current = new Inscription();
+           selectedItemIndex = -1;
+           return "Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -107,13 +138,15 @@ public class InscriptionController implements Serializable {
         }
     }
 
-    public String destroy() {
+    public String destroy(Sessionf f) {
         current = (Inscription) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
+        current.setSession(f);
+        f.setInscriptions(getFacade().listInscrit());
         recreatePagination();
         recreateModel();
-        return "List";
+        return "ListInscription";
     }
 
     public String destroyAndView() {

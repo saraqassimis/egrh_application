@@ -6,6 +6,8 @@
 
 package session;
 
+import bean.Inscription;
+import bean.Planformation;
 import bean.Sessionf;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,5 +32,8 @@ public interface SessionfFacadeLocal {
     List<Sessionf> findRange(int[] range);
 
     int count();
+    List<Inscription> loadInscription(Sessionf f);
+    List<Sessionf> loadSessionf(Planformation p);
+    List<Sessionf> listSession();
     
 }

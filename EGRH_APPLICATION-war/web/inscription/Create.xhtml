@@ -20,10 +20,11 @@
                     <h:outputLabel value="#{bundle.CreateInscriptionLabel_service}" for="service" />
                     <h:selectOneMenu id="service" value="#{inscriptionController.selected.service}" title="#{bundle.CreateInscriptionTitle_service}" >
                         <f:selectItems value="#{serviceController.itemsAvailableSelectOne}"/>
+                         <f:ajax render="employe" event="change" />
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateInscriptionLabel_employe}" for="employe" />
                     <h:selectOneMenu id="employe" value="#{inscriptionController.selected.employe}" title="#{bundle.CreateInscriptionTitle_employe}" >
-                        <f:selectItems value="#{employeController.itemsAvailableSelectOne}"/>
+                        <f:selectItems value="#{inscriptionController.rmployeFromService}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateInscriptionLabel_session}" for="session" />
                     <h:selectOneMenu id="session" value="#{inscriptionController.selected.session}" title="#{bundle.CreateInscriptionTitle_session}" >
@@ -31,13 +32,13 @@
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{inscriptionController.create}" value="#{bundle.CreateInscriptionSaveLink}" />
+                <h:commandLink action="#{inscriptionController.create(sessionfController.selected)}" value="#{bundle.CreateInscriptionSaveLink}" />
                 <br />
                 <br />
                 <h:commandLink action="#{inscriptionController.prepareList}" value="#{bundle.CreateInscriptionShowAllLink}" immediate="true"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.CreateInscriptionIndexLink}"/>
+                <h:link outcome="/sessionf/List" value="#{bundle.CreateInscriptionIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

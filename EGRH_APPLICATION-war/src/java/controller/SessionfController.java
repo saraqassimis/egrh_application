@@ -1,11 +1,13 @@
 package controller;
 
+import bean.Planformation;
 import bean.Sessionf;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.SessionfFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -24,12 +26,41 @@ public class SessionfController implements Serializable {
 
     private Sessionf current;
     private DataModel items = null;
+    private int indice;
     @EJB
     private session.SessionfFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
     public SessionfController() {
+    }
+    
+     public List<Sessionf> getAllSessionOfPlanF (Planformation p)
+    {
+        return getFacade().loadSessionf(p);
+    }
+    
+    
+    
+    
+    public int getNbrParticipants(Sessionf s)
+{    
+        return s.getInscriptions().size();
+}
+    
+public double getPrixTotal(Sessionf s){
+   
+    return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());
+    
+}
+
+
+   
+public String InscriptionOfSession (Sessionf f)
+    {
+    f.setInscriptions(ejbFacade.loadInscription(f));
+    current =f;
+    return"/inscription/ListInscription";
     }
 
     public Sessionf getSelected() {
@@ -62,6 +93,11 @@ public class SessionfController implements Serializable {
         return pagination;
     }
 
+    public String editView(Sessionf f)
+    {current = f;
+    indice=current.getPlanformation().getSessionfList().indexOf(f);
+    return "Edit";
+    }
     public String prepareList() {
         recreateModel();
         return "List";
@@ -79,11 +115,17 @@ public class SessionfController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public String create(Planformation p) {
         try {
+            current.setPlanformation(p);
             getFacade().create(current);
+            System.out.println("+++++++"+p.getSessionfList());
+            p.setSessionfList(getFacade().listSession());
+            System.out.println("*********"+p.getSessionfList());
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SessionfCreated"));
-            return prepareCreate();
+             current = new Sessionf();
+             selectedItemIndex = -1;
+             return "Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -107,13 +149,15 @@ public class SessionfController implements Serializable {
         }
     }
 
-    public String destroy() {
+    public String destroy(Planformation p) {
         current = (Sessionf) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
+         current.setPlanformation(p);
+         p.setSessionfList(getFacade().listSession());
         recreatePagination();
         recreateModel();
-        return "List";
+        return "ListSession";
     }
 
     public String destroyAndView() {

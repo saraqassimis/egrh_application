@@ -19,10 +19,6 @@
                     <h:inputText id="id" value="#{planformationController.selected.id}" title="#{bundle.CreatePlanformationTitle_id}" />
                     <h:outputLabel value="#{bundle.CreatePlanformationLabel_annee}" for="annee" />
                     <h:inputText id="annee" value="#{planformationController.selected.annee}" title="#{bundle.CreatePlanformationTitle_annee}" />
-                    <h:outputLabel value="#{bundle.CreatePlanformationLabel_volumeHoraire}" for="volumeHoraire" />
-                    <h:inputText id="volumeHoraire" value="#{planformationController.selected.volumeHoraire}" title="#{bundle.CreatePlanformationTitle_volumeHoraire}" />
-                    <h:outputLabel value="#{bundle.CreatePlanformationLabel_budgetTotal}" for="budgetTotal" />
-                    <h:inputText id="budgetTotal" value="#{planformationController.selected.budgetTotal}" title="#{bundle.CreatePlanformationTitle_budgetTotal}" />
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{planformationController.create}" value="#{bundle.CreatePlanformationSaveLink}" />

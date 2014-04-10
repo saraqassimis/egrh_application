@@ -1,1 +1,6 @@
-/build/
+/nbproject/private/
+/EGRH_APPLICATION-war/nbproject/private/
+/EGRH_APPLICATION-ejb/nbproject/private/
+/EGRH_APPLICATION-ejb/build/
+/EGRH_APPLICATION-war/build/
+/EGRH_APPLICATION-ejb/dist/

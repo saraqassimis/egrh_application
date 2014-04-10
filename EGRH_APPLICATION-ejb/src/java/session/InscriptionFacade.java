@@ -6,11 +6,16 @@
 
 package session;
 
+import bean.Employe;
 import bean.Inscription;
+import bean.Service;
+import bean.Sessionf;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -30,5 +35,24 @@ public class InscriptionFacade extends AbstractFacade<Inscription> implements In
     public InscriptionFacade() {
         super(Inscription.class);
     }
-    
+    @Override
+     public List<Inscription> loadInscription(Sessionf f)
+    {Query q= em.createQuery("SELECT i FROM Inscription i WHERE i.session.id ="+ f.getId());
+    return q.getResultList();
+    }
+     
+     @Override
+     public List<Employe> findServiceDeEmploye(Service s){
+        Query q=em.createQuery("SELECT e FROM Employe e WHERE e.service.id ="+s.getId());
+         System.out.println(q);
+          return  q.getResultList();
+              
+     } 
+     
+      @Override
+     public List<Inscription> listInscrit()
+    {Query q= em.createQuery("SELECT i FROM Inscription i");
+    return q.getResultList();
+    }
 }
+

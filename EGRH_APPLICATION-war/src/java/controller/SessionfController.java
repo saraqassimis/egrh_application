@@ -34,28 +34,22 @@ public class SessionfController implements Serializable {
 
     public SessionfController() {
     }
-    
+  
      public List<Sessionf> getAllSessionOfPlanF (Planformation p)
     {
         return getFacade().loadSessionf(p);
     }
-    
-    
-    
-    
+ 
     public int getNbrParticipants(Sessionf s)
 {    
         return s.getInscriptions().size();
 }
-    
-public double getPrixTotal(Sessionf s){
-   
-    return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());
-    
+ 
+public double getPrixTotal(Sessionf s)
+{
+    return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());  
 }
-
-
-   
+ 
 public String InscriptionOfSession (Sessionf f)
     {
     f.setInscriptions(ejbFacade.loadInscription(f));
@@ -92,12 +86,13 @@ public String InscriptionOfSession (Sessionf f)
         }
         return pagination;
     }
-
+ 
     public String editView(Sessionf f)
     {current = f;
     indice=current.getPlanformation().getSessionfList().indexOf(f);
     return "Edit";
     }
+
     public String prepareList() {
         recreateModel();
         return "List";
@@ -114,15 +109,16 @@ public String InscriptionOfSession (Sessionf f)
         selectedItemIndex = -1;
         return "Create";
     }
-
     public String create(Planformation p) {
         try {
+            System.out.println("avannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnt");
             current.setPlanformation(p);
             getFacade().create(current);
+            System.out.println("apreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees");
             System.out.println("+++++++"+p.getSessionfList());
             p.setSessionfList(getFacade().listSession());
             System.out.println("*********"+p.getSessionfList());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SessionfCreated"));
+            JsfUtil.addSuccessMessage("salut");
              current = new Sessionf();
              selectedItemIndex = -1;
              return "Create";

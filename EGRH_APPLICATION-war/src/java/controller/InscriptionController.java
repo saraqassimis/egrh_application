@@ -41,6 +41,7 @@ public class InscriptionController implements Serializable {
         return getFacade().loadInscription(f);
     }
     
+    
     public List<Employe> getRmployeFromService()
     {
         return ejbFacade.findServiceDeEmploye(current.getService());
@@ -99,7 +100,15 @@ public class InscriptionController implements Serializable {
     indice=current.getSession().getInscriptions().indexOf(i);
     return "Edit";
     }
-    
+     public String delete(Inscription i){
+        
+       System.out.println("a");
+    getFacade().remove(i);
+     System.out.println("b");
+     JsfUtil.addSuccessMessage("bien supprimeé");
+ 
+    return "ListInscription";
+}
    
     
     public String create(Sessionf f) {
@@ -109,7 +118,7 @@ public class InscriptionController implements Serializable {
            
             getFacade().create(current);
             System.out.println("+++++++"+f.getInscriptions());
-            f.setInscriptions(getFacade().listInscrit());
+            f.setInscriptions(getFacade().listInscrit(f));
             System.out.println("*********"+f.getInscriptions());
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("InscriptionCreated"));
            current = new Inscription();
@@ -137,13 +146,18 @@ public class InscriptionController implements Serializable {
             return null;
         }
     }
+    
+   
+    
 
     public String destroy(Sessionf f) {
         current = (Inscription) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         current.setSession(f);
-        f.setInscriptions(getFacade().listInscrit());
+        System.out.println("//////////////////////////////////////"+f.getInscriptions());
+        f.setInscriptions(getFacade().listInscrit(f));
+        System.out.println("+++++++lllllllllllllllllllllllllllllll"+f.getInscriptions());
         recreatePagination();
         recreateModel();
         return "ListInscription";

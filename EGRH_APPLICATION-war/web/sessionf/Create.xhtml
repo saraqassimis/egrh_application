@@ -23,7 +23,7 @@
                                 <div class="form-group">
                     <h:outputLabel value="Plan de formation :" class="col-sm-2 control-label" for="planformation" />
                     <div class="col-sm-6">
-                        <h:selectOneMenu id="planformation" value="#{sessionfController.selected.planformation}" class="form-control" title="#{bundle.CreateSessionfTitle_planformation}" required="true" requiredMessage="#{bundle.CreateSessionfRequiredMessage_planformation}">
+                        <h:selectOneMenu id="planformation" value="#{sessionfController.selected.planformation}" class="form-control" title="#{bundle.CreateSessionfTitle_planformation}" >
                         <f:selectItems value="#{planformationController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     </div></div>
@@ -31,7 +31,7 @@
                     <h:outputLabel value="Début :" class="col-sm-2 control-label" for="dateDebut" />
                     <div class="col-sm-6">
                         <h:inputText  class="form-control datep" id="dateDebut" value="#{sessionfController.selected.dateDebut}"  title="#{bundle.CreateSessionfTitle_dateDebut}" >
-                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
                      </h:inputText>
                        </div></div>
                     <div class="form-group">
@@ -43,9 +43,10 @@
                    </div></div>
                 <br />
                 <div style="margin-left: 365px">
-                                <h:commandLink  class="btn btn-primary "  action="#{sessionfController.create}" value="Ajouter" />
+                    <h:commandLink  class="btn btn-primary "  action="#{sessionfController.create(planformationController.selected)}" value="Ajouter" />
                                 <small></small>
                                 <h:commandLink  class="btn btn-info " action="#{sessionfController.prepareList}" value="Planning des sessions de formation " immediate="true"/>
+               <h:link outcome="/planformation/List" value="listPlanFormation"/>
                 </div>
 
                  </fieldset>
@@ -53,7 +54,10 @@
                         </div>
                                     </div>
                           </div>
-            
+            <script>
+                $( ".datep" ).datepicker();
+                $( ".datep" ).datepicker("option","dateFormat","dd/mm/yy");
+            </script>
         </ui:define>
     </ui:composition>
 

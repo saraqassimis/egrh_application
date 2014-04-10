@@ -50,8 +50,8 @@ public class InscriptionFacade extends AbstractFacade<Inscription> implements In
      } 
      
       @Override
-     public List<Inscription> listInscrit()
-    {Query q= em.createQuery("SELECT i FROM Inscription i");
+     public List<Inscription> listInscrit(Sessionf f)
+    {Query q= em.createQuery("SELECT i FROM Inscription i WHERE i.session.id ="+f.getId());
     return q.getResultList();
     }
 }

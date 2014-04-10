@@ -35,6 +35,6 @@ public interface InscriptionFacadeLocal {
     int count();
     public List<Inscription> loadInscription(Sessionf f);
     List<Employe> findServiceDeEmploye(Service s);
-    List<Inscription> listInscrit();
+    List<Inscription> listInscrit(Sessionf f);
     
 }

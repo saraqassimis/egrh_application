@@ -41,6 +41,7 @@ public class InscriptionController implements Serializable {
         return getFacade().loadInscription(f);
     }
     
+    
     public List<Employe> getRmployeFromService()
     {
         return ejbFacade.findServiceDeEmploye(current.getService());

@@ -36,7 +36,7 @@ public class PlanformationController implements Serializable {
     {
         p.setSessionfList(ejbFacade.loadSessionf(p));
         current =p;
-    return"/inscription/ListSession";
+    return"/sessionf/ListSession";
     }
     
     public Planformation getSelected() {

@@ -34,28 +34,22 @@ public class SessionfController implements Serializable {
 
     public SessionfController() {
     }
-    
+  
      public List<Sessionf> getAllSessionOfPlanF (Planformation p)
     {
         return getFacade().loadSessionf(p);
     }
-    
-    
-    
-    
+ 
     public int getNbrParticipants(Sessionf s)
 {    
         return s.getInscriptions().size();
 }
-    
-public double getPrixTotal(Sessionf s){
-   
-    return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());
-    
+ 
+public double getPrixTotal(Sessionf s)
+{
+    return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());  
 }
-
-
-   
+ 
 public String InscriptionOfSession (Sessionf f)
     {
     f.setInscriptions(ejbFacade.loadInscription(f));
@@ -99,11 +93,6 @@ public String InscriptionOfSession (Sessionf f)
     return "Edit";
     }
 
-    public String editView(Sessionf f)
-    {current = f;
-    indice=current.getPlanformation().getSessionfList().indexOf(f);
-    return "Edit";
-    }
     public String prepareList() {
         recreateModel();
         return "List";
@@ -120,7 +109,6 @@ public String InscriptionOfSession (Sessionf f)
         selectedItemIndex = -1;
         return "Create";
     }
-
     public String create(Planformation p) {
         try {
             System.out.println("avannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnt");

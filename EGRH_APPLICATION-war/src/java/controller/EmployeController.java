@@ -47,7 +47,7 @@ public class EmployeController implements Serializable {
           employe.setEvalueremployeList(ejbFacade.loadEvaluations(employe));
           System.out.println("*********la requet f le controller "+ejbFacade.loadEvaluations(employe));
            current=employe;
-        return "/evalueremploye/ListEvaluations";
+        return "/evaluationemploye/ListEvaluations";
       }
           
     public List<Poste> getPostOfSevice(){

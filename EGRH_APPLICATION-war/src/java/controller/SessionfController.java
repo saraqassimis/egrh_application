@@ -92,6 +92,12 @@ public String InscriptionOfSession (Sessionf f)
         }
         return pagination;
     }
+ 
+    public String editView(Sessionf f)
+    {current = f;
+    indice=current.getPlanformation().getSessionfList().indexOf(f);
+    return "Edit";
+    }
 
     public String editView(Sessionf f)
     {current = f;
@@ -117,12 +123,14 @@ public String InscriptionOfSession (Sessionf f)
 
     public String create(Planformation p) {
         try {
+            System.out.println("avannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnt");
             current.setPlanformation(p);
             getFacade().create(current);
+            System.out.println("apreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees");
             System.out.println("+++++++"+p.getSessionfList());
             p.setSessionfList(getFacade().listSession());
             System.out.println("*********"+p.getSessionfList());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SessionfCreated"));
+            JsfUtil.addSuccessMessage("salut");
              current = new Sessionf();
              selectedItemIndex = -1;
              return "Create";

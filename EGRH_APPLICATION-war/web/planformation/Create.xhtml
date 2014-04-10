@@ -21,14 +21,16 @@
                     <h:inputText id="annee" value="#{planformationController.selected.annee}" title="#{bundle.CreatePlanformationTitle_annee}" />
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{planformationController.create}" value="#{bundle.CreatePlanformationSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{planformationController.prepareList}" value="#{bundle.CreatePlanformationShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreatePlanformationIndexLink}"/>
+                 <div style="margin-left: 365px">
+                                <h:commandLink  class="btn btn-primary "  action="#{planformationController.create}" value="Ajouter" />
+                                <small></small>
+                                <h:commandLink  class="btn btn-info " action="#{planformationController.prepareList}" value="Liste des plans de formation " immediate="true"/>
+                                </div>
+               </fieldset>
             </h:form>
+                        </div>
+                                    </div>
+                          </div>
         </ui:define>
     </ui:composition>
 

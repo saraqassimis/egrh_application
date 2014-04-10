@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSessionfTitle}"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="body">
+          <div class="content-box-large">
+                <div class="panel-body">      
+                    <h:form >
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <fieldset >
+                            <legend>Liste des sessions des formations </legend><br></br>
+                             <h:commandLink action="#{sessionfController.prepareCreate()}" value="Ajouter une nouvelle session"/>
+                              <h:link outcome="/planformation/List" value="listPlanFormation"/>
+                             <h:dataTable value="#{sessionfController.getAllSessionOfPlanF(planformationController.selected)}" var="item" border="0" styleClass="table table-striped table-bordered example">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Formation"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.formation.libelle}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Année "/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.planformation.annee}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre de participants"/>
+                                    </f:facet>
+                                    <h:outputText value="#{sessionfController.getNbrParticipants(item)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prix total en (DH)"/>
+                                    </f:facet>
+                                    <h:outputText value="#{sessionfController.getPrixTotal(item)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Inscriptions"/>
+                                    </f:facet>
+                                    <h:commandLink class="btn btn-default" action="#{sessionfController.InscriptionOfSession(item)}" ><i class=" glyphicon glyphicon-user" style="font-size:15px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSessionfTitle_dateDebut}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dateDebut}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink class="btn btn-default" action="#{sessionfController.prepareView}" ><i class=" glyphicon glyphicon-eye-open " style="font-size:15px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                    <h:outputText value="     "/>
+                                    <h:commandLink class="btn btn-primary" action="#{sessionfController.prepareEdit}"><i class=" glyphicon glyphicon-pencil " style="font-size:15px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                    <h:outputText value="     "/>
+                                    <h:commandLink class="btn btn-danger" action="#{sessionfController.destroy}"><i class=" glyphicon glyphicon-remove " style="font-size:15px;"/></h:commandLink>
+                                </h:column>
+                            </h:dataTable>
+                            <br />
+                        </fieldset >
+                    </h:form>
+                </div></div>               
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -10,58 +10,60 @@
             <h:outputText value="#{bundle.ListPlanformationTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListPlanformationEmpty}" rendered="#{planformationController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{planformationController.items.rowCount > 0}">
-                    <h:outputText value="#{planformationController.pagination.pageFirstItem + 1}..#{planformationController.pagination.pageLastItem + 1}/#{planformationController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{planformationController.previous}" value="#{bundle.Previous} #{planformationController.pagination.pageSize}" rendered="#{planformationController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{planformationController.next}" value="#{bundle.Next} #{planformationController.pagination.pageSize}" rendered="#{planformationController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{planformationController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+          <div class="content-box-large">
+                <div class="panel-body">      
+                    <h:form >
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <fieldset >
+                            <legend>Liste des plans de formation </legend><br></br>
+                    <h:dataTable value="#{planformationController.items}" var="item" border="0" styleClass="table table-striped table-bordered example">
+                        
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlanformationTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlanformationTitle_annee}"/>
+                                <h:outputText value="Année"/>
                             </f:facet>
                             <h:outputText value="#{item.annee}"/>
                         </h:column>
-                        <h:column>
+                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlanformationTitle_volumeHoraire}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.volumeHoraire}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPlanformationTitle_budgetTotal}"/>
+                                <h:outputText value="Budget total en(DH)"/>
                             </f:facet>
                             <h:outputText value="#{item.budgetTotal}"/>
                         </h:column>
-                        <h:column>
+                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="Volume horaire globale en(H)"/>
                             </f:facet>
-                            <h:commandLink action="#{planformationController.prepareView}" value="#{bundle.ListPlanformationViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{planformationController.prepareEdit}" value="#{bundle.ListPlanformationEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{planformationController.destroy}" value="#{bundle.ListPlanformationDestroyLink}"/>
+                             <h:outputText  value="#{item.budgetTotal}"/>
                         </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{planformationController.prepareCreate}" value="#{bundle.ListPlanformationCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListPlanformationIndexLink}"/>
-            </h:form>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Planning"/>
+                            </f:facet>
+                             <h:commandLink class="btn btn-default " action="#{planformationController.SessionOfPlanF(item)}" >
+                                 <i class=" glyphicon glyphicon-calendar " style="font-size:15px;"/>
+                                 </h:commandLink>
+                          
+                        </h:column>
+                        <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink class="btn btn-default" action="#{sessionfController.prepareView}" ><i class=" glyphicon glyphicon-eye-open " style="font-size:15px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                    <h:outputText value="     "/>
+                                    <h:commandLink class="btn btn-primary" action="#{sessionfController.prepareEdit}"><i class=" glyphicon glyphicon-pencil " style="font-size:15px;"/></h:commandLink>
+                                    <h:outputText value="     "/>
+                                    <h:outputText value="     "/>
+                                    <h:commandLink class="btn btn-danger" action="#{sessionfController.destroy}"><i class=" glyphicon glyphicon-remove " style="font-size:15px;"/></h:commandLink>
+                                </h:column>
+                            </h:dataTable>
+                            <br />
+                        </fieldset >
+                    </h:form>
+                </div></div>               
         </ui:define>
     </ui:composition>
 

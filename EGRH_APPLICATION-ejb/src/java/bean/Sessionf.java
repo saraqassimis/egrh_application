@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -36,7 +37,12 @@ public class Sessionf implements Serializable {
      private Formation  formation = new Formation();
     @ManyToOne
      private Planformation planformation = new Planformation();
-    
+     @Transient
+        private int nbrParticipants;
+        
+        @Transient
+        private double prixTotal;
+
 
     public Long getId() {
         return id;
@@ -45,6 +51,23 @@ public class Sessionf implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public int getNbrParticipants() {
+        return nbrParticipants;
+    }
+
+    public void setNbrParticipants(int nbrParticipants) {
+        this.nbrParticipants = nbrParticipants;
+    }
+
+    public double getPrixTotal() {
+        return prixTotal;
+    }
+
+    public void setPrixTotal(double prixTotal) {
+        this.prixTotal = prixTotal;
+    }
+    
 
     public List<Inscription> getInscriptions() {
         return inscriptions;

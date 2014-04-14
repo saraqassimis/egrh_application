@@ -51,4 +51,15 @@ public class SessionfFacade extends AbstractFacade<Sessionf> implements Sessionf
         public List<Sessionf> listSession()
     {Query q= em.createQuery("SELECT f FROM Sessionf f");
     return q.getResultList();}
+        
+        @Override
+       public int getNbrParticipants(Sessionf s)
+{  
+        return s.getInscriptions().size();
+}
+  @Override
+public double getPrixTotal(Sessionf s)
+{ return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());
+    
+}
 }

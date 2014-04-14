@@ -35,5 +35,7 @@ public interface SessionfFacadeLocal {
     List<Inscription> loadInscription(Sessionf f);
     List<Sessionf> loadSessionf(Planformation p);
     List<Sessionf> listSession();
+    int getNbrParticipants(Sessionf s);
+    double getPrixTotal(Sessionf s);
     
 }

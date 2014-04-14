@@ -7,6 +7,7 @@
 package session;
 
 import bean.Service;
+import bean.Sessionf;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,6 +29,7 @@ public interface ServiceFacadeLocal {
     List<Service> findAll();
 
     List<Service> findRange(int[] range);
+   
 
     int count();
     

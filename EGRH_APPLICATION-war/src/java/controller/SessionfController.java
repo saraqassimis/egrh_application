@@ -31,14 +31,25 @@ public class SessionfController implements Serializable {
     private session.SessionfFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Planformation planformation;
 
     public SessionfController() {
     }
   
-     public List<Sessionf> getAllSessionOfPlanF (Planformation p)
+     public List<Sessionf> getAllSessionOfPlanF ()
     {
-        return getFacade().loadSessionf(p);
+        return getFacade().loadSessionf(planformation);
     }
+     
+      public int getNbrParticipants1(Sessionf s)
+{    
+        return ejbFacade.getNbrParticipants(s);
+}
+ 
+public double getPrixTotal1(Sessionf s)
+{
+    return ejbFacade.getPrixTotal(s);
+} 
  
     public int getNbrParticipants(Sessionf s)
 {    
@@ -49,7 +60,13 @@ public double getPrixTotal(Sessionf s)
 {
     return getNbrParticipants(s)* (s.getFormation().getPrixParPersonne());  
 }
- 
+
+public String sessionListPlanFormation ( Planformation p){
+   planformation = p;
+  return "/sessionf/ListSession";
+    
+} 
+
 public String InscriptionOfSession (Sessionf f)
     {
     f.setInscriptions(ejbFacade.loadInscription(f));
@@ -109,15 +126,13 @@ public String InscriptionOfSession (Sessionf f)
         selectedItemIndex = -1;
         return "Create";
     }
-    public String create(Planformation p) {
+    public String create() {
         try {
+           
             System.out.println("avannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnt");
-            current.setPlanformation(p);
+            current.setPlanformation(planformation);
             getFacade().create(current);
-            System.out.println("apreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees");
-            System.out.println("+++++++"+p.getSessionfList());
-            p.setSessionfList(getFacade().listSession());
-            System.out.println("*********"+p.getSessionfList());
+            
             JsfUtil.addSuccessMessage("salut");
              current = new Sessionf();
              selectedItemIndex = -1;

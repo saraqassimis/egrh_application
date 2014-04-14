@@ -30,19 +30,19 @@
                             <f:facet name="header">
                                 <h:outputText value="Budget total en(DH)"/>
                             </f:facet>
-                            <h:outputText value="#{item.budgetTotal}"/>
+                             <h:outputText value="#{planformationController.getPrixTotal(item)}"/>
                         </h:column>
                          <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Volume horaire globale en(H)"/>
                             </f:facet>
-                             <h:outputText  value="#{item.budgetTotal}"/>
+                             <h:outputText  value="#{planformationController.getVolumeHoraireTotal(item)}"/>
                         </h:column>
                          <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Planning"/>
                             </f:facet>
-                             <h:commandLink class="btn btn-default " action="#{planformationController.SessionOfPlanF(item)}" >
+                             <h:commandLink class="btn btn-default " action="#{sessionfController.sessionListPlanFormation(item)}" >
                                  <i class=" glyphicon glyphicon-calendar " style="font-size:15px;"/>
                                  </h:commandLink>
                           
@@ -51,13 +51,13 @@
                                     <f:facet name="header">
                                         <h:outputText value="&nbsp;"/>
                                     </f:facet>
-                                    <h:commandLink class="btn btn-default" action="#{sessionfController.prepareView}" ><i class=" glyphicon glyphicon-eye-open " style="font-size:15px;"/></h:commandLink>
+                                    <h:commandLink class="btn btn-default" action="#{planformationController.prepareView}" ><i class=" glyphicon glyphicon-eye-open " style="font-size:15px;"/></h:commandLink>
                                     <h:outputText value="     "/>
                                     <h:outputText value="     "/>
-                                    <h:commandLink class="btn btn-primary" action="#{sessionfController.prepareEdit}"><i class=" glyphicon glyphicon-pencil " style="font-size:15px;"/></h:commandLink>
+                                    <h:commandLink class="btn btn-primary" action="#{planformationController.prepareEdit}"><i class=" glyphicon glyphicon-pencil " style="font-size:15px;"/></h:commandLink>
                                     <h:outputText value="     "/>
                                     <h:outputText value="     "/>
-                                    <h:commandLink class="btn btn-danger" action="#{sessionfController.destroy}"><i class=" glyphicon glyphicon-remove " style="font-size:15px;"/></h:commandLink>
+                                    <h:commandLink class="btn btn-danger" action="#{planformationController.destroy}"><i class=" glyphicon glyphicon-remove " style="font-size:15px;"/></h:commandLink>
                                 </h:column>
                             </h:dataTable>
                             <br />

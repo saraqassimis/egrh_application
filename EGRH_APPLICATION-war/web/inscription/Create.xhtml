@@ -32,7 +32,7 @@
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{inscriptionController.create(sessionfController.selected)}" value="#{bundle.CreateInscriptionSaveLink}" />
+                <h:commandLink action="#{inscriptionController.create()}" value="#{bundle.CreateInscriptionSaveLink}" />
                 <br />
                 <br />
                 <h:commandLink action="#{inscriptionController.prepareList}" value="#{bundle.CreateInscriptionShowAllLink}" immediate="true"/>
@@ -40,7 +40,8 @@
                 <br />
                 <h:link outcome="/inscription/ListInscription" value="#{bundle.CreateInscriptionIndexLink}"/>
                 <br />
-                  <h:link outcome="/sessionf/List" value="ListSession"/>
+                  <h:commandLink action="/sessionf/ListSession" value="ListSession" />
+             
             </h:form>
         </ui:define>
     </ui:composition>

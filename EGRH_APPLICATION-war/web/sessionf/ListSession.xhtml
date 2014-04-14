@@ -20,8 +20,11 @@
                         <fieldset >
                             <legend>Liste des sessions des formations </legend><br></br>
                              <h:commandLink action="#{sessionfController.prepareCreate()}" value="Ajouter une nouvelle session"/>
-                              <h:link outcome="/planformation/List" value="listPlanFormation"/>
-                             <h:dataTable value="#{sessionfController.getAllSessionOfPlanF(planformationController.selected)}" var="item" border="0" styleClass="table table-striped table-bordered example">
+                             <br></br>
+                              <h:commandLink action="/planformation/List" value="listPlanFormation"/>
+                              
+                              
+                             <h:dataTable value="#{sessionfController.getAllSessionOfPlanF()}" var="item" border="0" styleClass="table table-striped table-bordered example">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Formation"/>
@@ -50,7 +53,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Inscriptions"/>
                                     </f:facet>
-                                    <h:commandLink class="btn btn-default" action="#{sessionfController.InscriptionOfSession(item)}" ><i class=" glyphicon glyphicon-user" style="font-size:15px;"/></h:commandLink>
+                                    <h:commandLink class="btn btn-default" action="#{inscriptionController.inscriptionListSession(item)}" ><i class=" glyphicon glyphicon-user" style="font-size:15px;"/></h:commandLink>
                                     <h:outputText value="     "/>
                                 </h:column>
                                 <h:column>

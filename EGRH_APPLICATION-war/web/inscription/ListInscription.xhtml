@@ -23,7 +23,7 @@
                                     <legend>Liste des inscriptions </legend><br></br>
                                    
                                     <h:commandLink value="cree" action="#{inscriptionController.prepareCreate()}"/>
-                                    <h:dataTable value="#{inscriptionController.getAllInscriptionOfSessionf(sessionfController.selected)}" var="item" styleClass="table table-striped table-bordered example">
+                                    <h:dataTable value="#{inscriptionController.getAllInscriptionOfSessionf()}" var="item" styleClass="table table-striped table-bordered example">
                         
                      <h:column>
                             <f:facet name="header">

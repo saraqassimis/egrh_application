@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Planformation;
+import bean.Sessionf;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.PlanformationFacade;
@@ -26,6 +27,7 @@ public class PlanformationController implements Serializable {
     private DataModel items = null;
     @EJB
     private session.PlanformationFacade ejbFacade;
+    private session.SessionfFacade ejbsessionf;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -34,11 +36,34 @@ public class PlanformationController implements Serializable {
 
     public String SessionOfPlanF (Planformation p)
     {
-        p.setSessionfList(ejbFacade.loadSessionf(p));
+       p.setSessionfList(ejbFacade.loadSessionf(p));
         current =p;
+        
     return"/sessionf/ListSession";
     }
+   
     
+    public double  getPrixTotal(Planformation f){
+      double prixTotal = 0;
+        if(f.getSessionfList().size() > 0){
+                    for(int i = 0; i< f.getSessionfList().size(); i++){
+                        prixTotal += f.getSessionfList().get(i).getFormation().getPrixParPersonne() * 
+                                f.getSessionfList().get(i).getInscriptions().size();
+                    }
+        }
+        return prixTotal;
+}
+    
+       public double  getVolumeHoraireTotal(Planformation f){
+        int dureeTotal = 0;
+        if(f.getSessionfList().size() > 0){
+                  for(int i = 0; i< f.getSessionfList().size(); i++){
+                        dureeTotal += f.getSessionfList().get(i).getFormation().getDuree();
+                    }
+        }
+        return dureeTotal;
+}
+   
     public Planformation getSelected() {
         if (current == null) {
             current = new Planformation();
@@ -50,6 +75,8 @@ public class PlanformationController implements Serializable {
     private PlanformationFacade getFacade() {
         return ejbFacade;
     }
+    
+
 
     public PaginationHelper getPagination() {
         if (pagination == null) {

@@ -30,13 +30,24 @@ public class InscriptionController implements Serializable {
     private int indice;
     @EJB
     private session.InscriptionFacade ejbFacade;
+ 
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private Sessionf sessionf;
+    private Sessionf sessionf ;
 
     public InscriptionController() {
     }
+public String ListSessionsFromInscri ( Sessionf s ){
+   sessionf = s;
+  return "/sessionf/ListSession";
+    
+} 
 
+ public String ListSessionFromInsc2 (Sessionf s){
+    s.setInscriptions(getFacade().loadInscription(s));
+    sessionf = s;
+     return "/sessionf/ListSession";
+}
     public List<Inscription> getAllInscriptionOfSessionf ()
     {
         return getFacade().loadInscription(sessionf);
@@ -121,13 +132,13 @@ public String inscriptionListSession ( Sessionf s){
     public String create() {
         
         try {
+           
             current.setSession(sessionf);
            
             getFacade().create(current);
-            
-            
-           
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("InscriptionCreated"));
+    //   s.setInscriptions(ejbFacade.listInscrit(s));
+        
+        JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("InscriptionCreated"));
            current = new Inscription();
            selectedItemIndex = -1;
            return "Create";

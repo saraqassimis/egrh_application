@@ -65,7 +65,13 @@ public String sessionListPlanFormation ( Planformation p){
    planformation = p;
   return "/sessionf/ListSession";
     
-} 
+}  
+public String listSessions(){
+    
+     getFacade().loadSessionf(planformation);
+    return"/sessionf/ListSession";
+}
+
 
 public String InscriptionOfSession (Sessionf f)
     {
